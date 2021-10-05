@@ -1,0 +1,2 @@
+(()=>{var n=new WeakMap;window.clickboxAsyncCallback((function a(e){var t,i,o;e.token,function(n,a){if(!(n instanceof a))throw new TypeError("Cannot call a class as a function")}(this,a),o={writable:!0,value:null},function(n,a){if(a.has(n))throw new TypeError("Cannot initialize the same private elements twice on an object")}(t=this,i=n),i.set(t,o)}))})();
+//# sourceMappingURL=clickbox-widget.js.map
