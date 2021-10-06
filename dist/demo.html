@@ -34,6 +34,13 @@
       <input type="text" name="country" value="BS" max="2" min="2"  style="width: 50px;">
     </label>
     <label>
+      Language<br>
+      <select name="locale">
+        <option value="en">English</option>
+        <option value="es">Spanish</option>
+      </select> 
+    </label>
+    <label>
       <input type="checkbox" name="readonly"> Readonly
     </label>
     <label>
@@ -51,6 +58,7 @@
           .setToken(document.querySelector('[name=token]').value)
           .selectLocation({
             country: document.querySelector('[name=country]').value,
+            locale: document.querySelector('[name=locale]').value,
             readonly: document.querySelector('[name=readonly]').checked,
             oversized: document.querySelector('[name=oversized]').checked,
           },function(data) {
