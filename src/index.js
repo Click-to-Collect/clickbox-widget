@@ -1,6 +1,6 @@
 class Clickbox {
   #__token = null
-  #__host = 'https://clickbox-locations.vercel.app/'
+  #__host = 'https://location-selector.clickbox.com/'
   // #__host = 'http://localhost:8081/'
 
   constructor(token) {
