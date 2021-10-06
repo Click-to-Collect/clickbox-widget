@@ -1,18 +1,22 @@
 class Clickbox {
   #__token = null
-  #__host = 'https://clickbox-locations.vercel.app/'
-  // #__host = 'http://localhost:8081/'
+  // #__host = 'https://clickbox-locations.vercel.app/'
+  #__host = 'http://localhost:8081/'
 
-  constructor({
-    merchantToken
-  }) {
-    this.#__token = merchantToken
+  constructor(token) {
+    this.setToken(token)
+  }
+
+  setToken(token) {
+    this.#__token = token
+
+    return this
   }
 
   selectLocation(params,callback) {
     const el = this.#__createModal(params)
     const query = Object.entries({
-      merchantToken: this.#__token,
+      token: this.#__token,
       ...params
     }).reduce((c,[k,v]) => (c.push(k+'='+(typeof v == "boolean" ? (v ? 1 : 0) : v)),c),[])
       .join('&')
@@ -21,11 +25,16 @@ class Clickbox {
 
     const listener = ({data: {action,data},origin,source}) => {
       if(source == el.contentWindow) {
-        if(action == 'select' && !params.readonly) {
-          callback(data)
+        try {
+          if(action == 'select' && !params.readonly) {
+            callback(data)
+          }
+        } catch (error) {
+          console.error(error)
+        } finally {
+          window.removeEventListener("message", listener);
+          this.#__closeModal(el)
         }
-        window.removeEventListener("message", listener);
-        this.#__closeModal(el)
       }
     }
 
@@ -62,4 +71,5 @@ class Clickbox {
 if(window.clickboxAsyncCallback) {
   window.clickboxAsyncCallback(Clickbox)
 }
+
 export default Clickbox

@@ -20,20 +20,18 @@
 
     <script>
       function clickboxAsyncCallback(Clickbox) {
-        window.clickbox = new Clickbox({
-          merchantToken: 13
-        })
+        window.clickbox = new Clickbox()
       }
     </script>
   </head>
   <body>
     <label>
       Merchant token<br>
-      <input type="text" name="merchantToken" value="13">
+      <input type="text" name="token" value="13" style="width: 300px;">
     </label>
     <label>
       Country<br>
-      <input type="text" name="country" value="BS">
+      <input type="text" name="country" value="BS" max="2" min="2"  style="width: 50px;">
     </label>
     <label>
       <input type="checkbox" name="readonly"> Readonly
@@ -49,13 +47,15 @@
     <script>
       // Example
       document.querySelector('#select-button').addEventListener('click',function() {
-        clickbox.selectLocation({
-          country: document.querySelector('[name=country]').value,
-          readonly: document.querySelector('[name=readonly]').checked,
-          oversized: document.querySelector('[name=oversized]').checked,
-        },function(data) {
-          document.querySelector('#data').innerHTML = JSON.stringify(data,null,2)
-        })
+        clickbox
+          .setToken(document.querySelector('[name=token]').value)
+          .selectLocation({
+            country: document.querySelector('[name=country]').value,
+            readonly: document.querySelector('[name=readonly]').checked,
+            oversized: document.querySelector('[name=oversized]').checked,
+          },function(data) {
+            document.querySelector('#data').innerHTML = JSON.stringify(data,null,2)
+          })
       })
     </script>
 

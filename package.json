@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "dist/clickbox-widget.js",
   "license": "MIT",
+  "author": "Salem Sallnäs <salem.sallnas@gmail.com>",
   "devDependencies": {
     "webpack": "^5.55.1",
     "webpack-cli": "^4.8.0"
