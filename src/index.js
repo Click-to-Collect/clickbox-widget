@@ -16,8 +16,8 @@ class Clickbox {
   selectLocation(params,callback) {
     const el = this.#__createModal(params)
     const query = Object.entries({
+      ...params,
       token: this.#__token,
-      ...params
     }).reduce((c,[k,v]) => (c.push(k+'='+(typeof v == "boolean" ? (v ? 1 : 0) : v)),c),[])
       .join('&')
 
