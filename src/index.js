@@ -11,11 +11,13 @@ class Clickbox {
 
   selectLocation(params,callback) {
     const el = this.#__createModal(params)
-    const query = new URLSearchParams(params)
+    const query = Object.entries({
+      merchantToken: this.#__token,
+      ...params
+    }).reduce((c,[k,v]) => (c.push(k+'='+(typeof v == "boolean" ? (v ? 1 : 0) : v)),c),[])
+      .join('&')
 
-    query.append('merchantToken',this.#__token)
-
-    el.src = `${this.#__host}?` + query.toString()
+    el.src = `${this.#__host}?${query}`
 
     const listener = ({data: {action,data},origin,source}) => {
       if(source == el.contentWindow) {
