@@ -37,8 +37,8 @@ class Clickbox {
     return this
   }
 
-  selectLocation(params) {
-    const el = __createModal(params)
+  selectLocation(params = {}) {
+    const el = __createModal()
     const query = Object.entries({
       ...params,
       token: __token,
