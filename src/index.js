@@ -53,6 +53,8 @@ class Clickbox {
           try {
             if(action == 'select' && !params.readonly) {
               resolve(data)
+            } else {
+              resolve()
             }
           } catch (error) {
             console.error(error)
