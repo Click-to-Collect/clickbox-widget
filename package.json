@@ -1,14 +1,12 @@
 {
   "name": "clickbox-widget",
   "version": "1.0.0",
-  "main": "dist/clickbox-widget.js",
+  "main": "src/index.js",
   "license": "MIT",
   "author": "Salem Sallnäs <salem.sallnas@gmail.com>",
   "devDependencies": {
     "webpack": "^5.55.1",
-    "webpack-cli": "^4.8.0"
-  },
-  "dependencies": {
+    "webpack-cli": "^4.8.0",
     "@babel/core": "^7.15.5",
     "@babel/preset-env": "^7.15.6",
     "babel-loader": "^8.2.2"
