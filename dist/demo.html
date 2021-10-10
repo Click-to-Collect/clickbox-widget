@@ -61,7 +61,7 @@
             locale: document.querySelector('[name=locale]').value,
             readonly: document.querySelector('[name=readonly]').checked,
             oversized: document.querySelector('[name=oversized]').checked,
-          },function(data) {
+          }).then(function(data) {
             document.querySelector('#data').innerHTML = JSON.stringify(data,null,2)
           })
       })

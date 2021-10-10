@@ -37,7 +37,7 @@ class Clickbox {
     return this
   }
 
-  selectLocation(params,callback) {
+  selectLocation(params) {
     const el = __createModal(params)
     const query = Object.entries({
       ...params,
@@ -47,24 +47,27 @@ class Clickbox {
 
     el.src = `${__host}?${query}`
 
-    const listener = ({data: {action,data},origin,source}) => {
-      if(source == el.contentWindow) {
-        try {
-          if(action == 'select' && !params.readonly) {
-            callback(data)
+    return new Promise((resolve,reject) => {
+      const listener = ({data: {action,data},origin,source}) => {
+        if(source == el.contentWindow) {
+          try {
+            if(action == 'select' && !params.readonly) {
+              resolve(data)
+            }
+          } catch (error) {
+            console.error(error)
+            reject(error)
+          } finally {
+            window.removeEventListener("message", listener);
+            __closeModal(el)
           }
-        } catch (error) {
-          console.error(error)
-        } finally {
-          window.removeEventListener("message", listener);
-          __closeModal(el)
         }
       }
-    }
-
-    window.addEventListener("message", listener);
-
-    document.body.appendChild(el)
+  
+      window.addEventListener("message", listener);
+  
+      document.body.appendChild(el)
+    })
   }
 }
 
