@@ -1,27 +1,51 @@
-class Clickbox {
-  #__token = null
-  #__host = 'https://location-selector.clickbox.com/'
-  // #__host = 'http://localhost:8081/'
+let __token = null
 
+const __host = 'https://location-selector.clickbox.com/' 
+
+const __createModal = () => {
+  const el = document.createElement('iframe')
+  el.style = `
+    position: fixed; 
+    display: block; 
+    width: 100%; 
+    height: 100%; 
+    top: 0px; 
+    left: 0px; 
+    box-sizing: content-box; 
+    z-index: 2147483647; 
+    opacity: 1;'
+  `
+  el.setAttribute('frameborder',0)
+  el.setAttribute('allowtransparency',true)
+  el.title = 'Clickbox Locations'
+
+  return el
+}
+
+const __closeModal = (el) => {
+  el.remove()
+}
+
+class Clickbox {
   constructor(token) {
     this.setToken(token)
   }
 
   setToken(token) {
-    this.#__token = token
+    __token = token
 
     return this
   }
 
   selectLocation(params,callback) {
-    const el = this.#__createModal(params)
+    const el = __createModal(params)
     const query = Object.entries({
       ...params,
-      token: this.#__token,
+      token: __token,
     }).reduce((c,[k,v]) => (c.push(k+'='+(typeof v == "boolean" ? (v ? 1 : 0) : v)),c),[])
       .join('&')
 
-    el.src = `${this.#__host}?${query}`
+    el.src = `${__host}?${query}`
 
     const listener = ({data: {action,data},origin,source}) => {
       if(source == el.contentWindow) {
@@ -33,7 +57,7 @@ class Clickbox {
           console.error(error)
         } finally {
           window.removeEventListener("message", listener);
-          this.#__closeModal(el)
+          __closeModal(el)
         }
       }
     }
@@ -41,30 +65,6 @@ class Clickbox {
     window.addEventListener("message", listener);
 
     document.body.appendChild(el)
-  }
-
-  #__createModal() {
-    const el = document.createElement('iframe')
-    el.style = `
-      position: fixed; 
-      display: block; 
-      width: 100%; 
-      height: 100%; 
-      top: 0px; 
-      left: 0px; 
-      box-sizing: content-box; 
-      z-index: 2147483647; 
-      opacity: 1;'
-    `
-    el.setAttribute('frameborder',0)
-    el.setAttribute('allowtransparency',true)
-    el.title = 'Clickbox Locations'
-
-    return el
-  }
-
-  #__closeModal(el) {
-    el.remove()
   }
 }
 
