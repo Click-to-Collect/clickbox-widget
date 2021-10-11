@@ -48,7 +48,7 @@ class Clickbox {
     el.src = `${__host}?${query}`
 
     return new Promise((resolve,reject) => {
-      const listener = ({data: {action,data},origin,source}) => {
+      const listener = ({data: {action,data},source}) => {
         if(source == el.contentWindow) {
           try {
             if(action == 'select' && !params.readonly) {
