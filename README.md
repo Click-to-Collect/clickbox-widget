@@ -47,7 +47,9 @@ const clickbox = new Clickbox(merchantToken)
  - **readonly** (***boolean***)
  Indicates that locations cannot be selected, only displayed. Useful when usign as a reference. Default: `false`.
  - **oversized** (***boolean***)
- Indicates that the shipment is oversized and only applicable location will be shown and selectable. Default: `false`.
+ Indicates that the shipment is oversized and only applicable locations will be shown and selectable. Default: `false`.
+ - **lockersOnly** (***boolean***)
+ Only locker locations will be shown and selectable. Default: `false`.
 
 #### Example
 ```
@@ -56,6 +58,7 @@ clickbox.selectLocation({
   locale: 'en',
   readonly: false,
   oversized: false,
+  lockersOnly: false,
 })
 ```
 
