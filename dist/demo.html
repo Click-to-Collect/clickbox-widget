@@ -46,6 +46,9 @@
     <label>
       <input type="checkbox" name="oversized"> Oversized
     </label>
+    <label>
+      <input type="checkbox" name="lockersOnly"> Lockers only
+    </label>
     
     <button id="select-button">Select location</button>
     <br><br>
@@ -61,6 +64,7 @@
             locale: document.querySelector('[name=locale]').value,
             readonly: document.querySelector('[name=readonly]').checked,
             oversized: document.querySelector('[name=oversized]').checked,
+            lockersOnly: document.querySelector('[name=lockersOnly]').checked,
           }).then(function(data) {
             document.querySelector('#data').innerHTML = JSON.stringify(data,null,2)
           })
