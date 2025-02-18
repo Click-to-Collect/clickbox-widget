@@ -5,6 +5,7 @@ const __host = 'https://location-selector.clickbox.com/'
 const __createModal = () => {
   const el = document.createElement('iframe')
   el.style = `
+    background: rgba(27, 27, 27, 0.8);
     position: fixed; 
     display: block; 
     width: 100%; 
@@ -67,7 +68,7 @@ class Clickbox {
       }
   
       window.addEventListener("message", listener);
-  
+
       document.body.appendChild(el)
     })
   }

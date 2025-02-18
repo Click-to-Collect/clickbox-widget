@@ -1,12 +1,12 @@
 {
   "name": "clickbox-widget",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "main": "src/index.js",
   "license": "MIT",
   "author": {
-    "name" : "Clickbox",
-    "email" : "hello@clickbox.com",
-    "url" : "http://clickbox.com/"
+    "name": "Clickbox",
+    "email": "hello@clickbox.com",
+    "url": "http://clickbox.com/"
   },
   "homepage": "https://github.com/Click-to-Collect/clickbox-widget#readme",
   "repository": {
