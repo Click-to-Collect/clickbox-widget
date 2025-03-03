@@ -5,7 +5,8 @@ const __host = 'https://location-selector.clickbox.com/'
 const __createModal = () => {
   const el = document.createElement('iframe')
   el.style = `
-    background: rgba(27, 27, 27, 0.8);
+    color-scheme: auto;
+    background: #1b1b1bcc;
     position: fixed; 
     display: block; 
     width: 100%; 

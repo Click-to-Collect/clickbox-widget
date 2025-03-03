@@ -4,55 +4,85 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
     <title>Clickbox Widget</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.classless.min.css">
     <style>
-      code#data {
-        display: block; 
-        border: 1px solid #f99f; 
-        padding: 1rem; 
-        white-space: pre-wrap;
+      body {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
       }
-      label {
-        display: block;
-        margin-bottom: 1rem;
+
+      main {
+        display: flex;
+        flex-direction: row;
+      }
+
+      #form {
+        flex: 50%;
+        padding: 1rem;
+      }
+
+      #results {
+        flex: 50%;
+        max-width: 50%;
+        padding: 1rem;
+      }
+
+      #data {
+        width: 100%;
+        white-space: pre;
+        overflow: auto;
       }
     </style>
-    <script src="clickbox.js" async></script>
-
     <script>
       function clickboxAsyncCallback(Clickbox) {
+        console.info('Clickbox widget loaded')
         window.clickbox = new Clickbox()
       }
     </script>
+    <script src="clickbox.js" async></script>
+
   </head>
   <body>
-    <label>
-      Merchant token<br>
-      <input type="text" name="token" value="8ec3849e-35ac-420c-8351-66c885957f30" style="width: 300px;">
-    </label>
-    <label>
-      Country<br>
-      <input type="text" name="country" value="CR" max="2" min="2"  style="width: 50px;">
-    </label>
-    <label>
-      Language<br>
-      <select name="locale">
-        <option value="en">English</option>
-        <option value="es" selected>Spanish</option>
-      </select> 
-    </label>
-    <label>
-      <input type="checkbox" name="readonly"> Readonly
-    </label>
-    <label>
-      <input type="checkbox" name="oversized"> Oversized
-    </label>
-    <label>
-      <input type="checkbox" name="lockersOnly"> Lockers only
-    </label>
-    
-    <button id="select-button">Select location</button>
-    <br><br>
-    <code id="data"></code>
+    <header>
+      <h1>Clickbox Widget Demo</h1>
+    </header>
+    <main>
+      <div id="form">
+        <label>
+          Merchant token
+          <input type="text" name="token" value="8ec3849e-35ac-420c-8351-66c885957f30">
+          <small id="email-helper">You can use your own token provided by Clickbox.</small>
+        </label>
+        <label>
+          Country
+          <input type="text" name="country" value="CR" maxlength="2" minlength="2" >
+        </label>
+        <label>
+          Language
+          <select name="locale">
+            <option value="en" selected>English</option>
+            <option value="es">Spanish</option>
+          </select> 
+        </label>
+        <label>
+          <input type="checkbox" name="readonly"> Readonly
+        </label>
+        <label>
+          <input type="checkbox" name="oversized"> Oversized
+        </label>
+        <label>
+          <input type="checkbox" name="lockersOnly"> Lockers only
+        </label>
+        
+        <button id="select-button">Select location</button>
+      </div>
+      <div id="results">
+        Results
+        <code id="data"></code>
+        <img id="image" src="">
+      </div>
+    </main>
 
     <script>
       // Example
@@ -67,6 +97,7 @@
             lockersOnly: document.querySelector('[name=lockersOnly]').checked,
           }).then(function(data) {
             document.querySelector('#data').innerHTML = JSON.stringify(data,null,2)
+            document.querySelector('#image').src = data.image ?? ''
           })
       })
     </script>
